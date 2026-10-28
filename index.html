@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-icon">📚</div><div><h1>LibraDesk</h1><p>Library Management System</p></div></div>
+  <span class="status"><i></i> Library portal</span>
+</header>
+<main class="container">
+  <section class="welcome">
+    <div><p class="eyebrow">LIBRARY ADMINISTRATION</p><h2>Manage your library, <span>simply.</span></h2><p class="sub">Keep track of books, student borrowing, and returns in one place.</p></div>
+    <div class="welcome-art" aria-hidden="true">📖</div>
+  </section>
+  <section class="stats">
+    <article class="stat"><div class="stat-label">Total titles</div><strong id="statTitles">—</strong><span>Unique books in catalog</span></article>
+    <article class="stat"><div class="stat-label">Total copies</div><strong id="statCopies">—</strong><span>Across all book titles</span></article>
+    <article class="stat"><div class="stat-label">Available copies</div><strong id="statAvailable">—</strong><span>Ready to be issued</span></article>
+    <article class="stat"><div class="stat-label">Transactions</div><strong id="statTransactions">—</strong><span>Issue and return records</span></article>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h3>Book catalogue</h3><p>Search, sort, add, or remove books.</p></div><button class="primary" id="openAdd">＋ Add a book</button></div>
+    <div class="toolbar">
+      <label class="search"><span>⌕</span><input id="search" placeholder="Search by ID, title, or author…"></label>
+      <label class="sort-label">Sort by <select id="sort"><option value="">Default</option><option value="title">Title (A–Z)</option><option value="id">Book ID</option></select></label>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>BOOK</th><th>AUTHOR</th><th>BOOK ID</th><th>AVAILABILITY</th><th>ACTION</th></tr></thead><tbody id="booksBody"><tr><td colspan="5" class="empty">Loading books…</td></tr></tbody></table></div>
+  </section>
+  <section class="two-col">
+    <section class="panel"><div class="panel-heading"><div><h3>Issue a book</h3><p>Record a student borrowing a copy.</p></div><span class="panel-icon">↗</span></div>
+      <form id="issueForm" class="form-grid">
+        <label>Book ID<input name="bookId" placeholder="e.g. B101" required></label>
+        <label>Student ID<input name="studentId" placeholder="e.g. STU001" required></label>
+        <label class="full">Student name<input name="studentName" placeholder="Enter full name" required></label>
+        <button class="primary full" type="submit">Issue book</button>
+      </form>
+    </section>
+    <section class="panel"><div class="panel-heading"><div><h3>Return a book</h3><p>Use the same book and student IDs.</p></div><span class="panel-icon">↙</span></div>
+      <form id="returnForm" class="form-grid">
+        <label>Book ID<input name="bookId" placeholder="e.g. B101" required></label>
+        <label>Student ID<input name="studentId" placeholder="e.g. STU001" required></label>
+        <button class="primary full" type="submit">Return book</button>
+      </form>
+    </section>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h3>Recent activity</h3><p>Latest issue and return transactions.</p></div><button class="secondary" id="refresh">↻ Refresh</button></div>
+    <div class="table-wrap"><table><thead><tr><th>TYPE</th><th>BOOK</th><th>STUDENT</th><th>DATE & TIME</th></tr></thead><tbody id="transactionsBody"><tr><td colspan="4" class="empty">Loading activity…</td></tr></tbody></table></div>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h3>Waiting list</h3><p>FIFO queue for students waiting for an unavailable book.</p></div><button class="secondary" id="refreshWaitlist">↻ Refresh</button></div>
+    <div id="waitlist" class="waitlist"><p class="empty">Loading waiting list…</p></div>
+  </section>
+  <footer>Library Management System <span>DSA Technical Training Project · Java + HTML/CSS/JS</span></footer>
+</main>
+<dialog id="addDialog">
+  <form id="addForm" method="dialog" class="dialog-form">
+    <div class="dialog-head"><div><p class="eyebrow">CATALOGUE</p><h3>Add a new book</h3></div><button type="button" class="close" id="closeAdd" aria-label="Close">×</button></div>
+    <label>Book ID<input name="id" placeholder="e.g. B104" required></label>
+    <label>Book title<input name="title" placeholder="Enter book title" required></label>
+    <label>Author<input name="author" placeholder="Enter author name" required></label>
+    <label>Total copies<input name="total" type="number" min="1" value="1" required></label>
+    <button class="primary" type="submit">Save book</button>
+  </form>
+</dialog>
+<div id="toast" role="status" class="toast"></div>
+<script src="app.js"></script>
+</body></html>
